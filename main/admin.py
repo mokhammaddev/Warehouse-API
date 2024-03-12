@@ -1,3 +1,7 @@
 from django.contrib import admin
+from main.models import *
 
-# Register your models here.
+admin.site.register(Product)
+admin.site.register(Material)
+admin.site.register(ProductMaterial)
+# admin.site.register(Warehouse)
