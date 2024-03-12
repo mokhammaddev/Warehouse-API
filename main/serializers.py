@@ -21,15 +21,22 @@ class ProductMaterialSerializer(serializers.ModelSerializer):
 
 
 class OrderCountSerializer(serializers.ModelSerializer):
+    product_materials = serializers.SerializerMethodField(read_only=True)
+
+    def get_product_materials(self, obj):
+        product_materials = Material.objects.all()
+        serializer = MaterialSerializer(product_materials, many=True)
+        return serializer.data
+
     class Meta:
         model = OrderCount
-        fields = ['id', 'product_name', 'product_qty']
+        fields = ['id', 'product_name', 'product_qty', 'product_materials']
 
-    def create(self, validated_data):
-        materials = Material.objects.all()
-        product_qty = validated_data.get('product_qty')
-        product_name = validated_data.get('product_name')
-        print(product_name, product_qty)
-        instance = OrderCount.objects.create(**validated_data)
-        instance.save()
-        return instance
+    # def create(self, validated_data):
+    #     materials = Material.objects.all()
+    #     product_qty = validated_data.get('product_qty')
+    #     product_name = validated_data.get('product_name')
+    #     # print(product_name, product_qty)
+    #     instance = OrderCount.objects.create(**validated_data)
+    #     instance.save()
+    #     return instance
