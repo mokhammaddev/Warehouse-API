@@ -19,8 +19,17 @@ class ProductMaterialSerializer(serializers.ModelSerializer):
         model = ProductMaterial
         fields = '__all__'
 
-#
-# class WarehouseSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Warehouse
-#         fields = '__all__'
+
+class OrderCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderCount
+        fields = ['id', 'product_name', 'product_qty']
+
+    def create(self, validated_data):
+        materials = Material.objects.all()
+        product_qty = validated_data.get('product_qty')
+        product_name = validated_data.get('product_name')
+        print(product_name, product_qty)
+        instance = OrderCount.objects.create(**validated_data)
+        instance.save()
+        return instance
