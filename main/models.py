@@ -25,6 +25,18 @@ class Material(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def get_name(self):
+        return self.name
+
+    @property
+    def get_price(self):
+        return self.price
+
+    @property
+    def get_count(self):
+        return self.count
+
 
 class ProductMaterial(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)

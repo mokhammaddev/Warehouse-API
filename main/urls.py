@@ -2,13 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from main.views import ProductListCreateAPIView, MaterialListCreateAPIView, ProductMaterialListCreateAPIView, \
-    OrderCountListCreateAPIView
+    ResultListCreateAPIView
 
 urlpatterns = [
     path('products/', ProductListCreateAPIView.as_view()),
     path('materials/', MaterialListCreateAPIView.as_view()),
     path('products-materials/', ProductMaterialListCreateAPIView.as_view()),
-    path('', OrderCountListCreateAPIView.as_view()),
+    path('', ResultListCreateAPIView.as_view()),
     # path('warehouses/', WarehouseListCreateAPIView.as_view()),
 ]
 

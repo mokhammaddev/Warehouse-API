@@ -18,9 +18,20 @@ class ProductMaterialListCreateAPIView(ListCreateAPIView):
     queryset = ProductMaterial.objects.all()
 
 
-class OrderCountListCreateAPIView(ListCreateAPIView):
+class ResultListCreateAPIView(ListCreateAPIView):
     serializer_class = ResultSerializer
     queryset = Result.objects.all()
+
+    # def get_serializer_context(self):
+    #     ctx = super().get_serializer_context()
+    #     ctx['post_id'] = self.kwargs.get('post_id')
+    #     return ctx
+    #
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     post_id = self.kwargs.get('post_id')
+    #     qs = qs.filter(post_id=post_id)
+    #     return qs
 
 #
 # class WarehouseListCreateAPIView(ListCreateAPIView):
