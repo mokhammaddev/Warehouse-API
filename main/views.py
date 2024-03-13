@@ -1,6 +1,6 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from main.models import ProductMaterial, Product, Material, OrderCount
-from main.serializers import ProductSerializer, MaterialSerializer, ProductMaterialSerializer, OrderCountSerializer
+from main.models import ProductMaterial, Product, Material, Result
+from main.serializers import ProductSerializer, MaterialSerializer, ProductMaterialSerializer, ResultSerializer
 
 
 class ProductListCreateAPIView(ListCreateAPIView):
@@ -19,8 +19,8 @@ class ProductMaterialListCreateAPIView(ListCreateAPIView):
 
 
 class OrderCountListCreateAPIView(ListCreateAPIView):
-    serializer_class = OrderCountSerializer
-    queryset = OrderCount.objects.all()
+    serializer_class = ResultSerializer
+    queryset = Result.objects.all()
 
 #
 # class WarehouseListCreateAPIView(ListCreateAPIView):

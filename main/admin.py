@@ -3,8 +3,11 @@ from main.models import *
 
 admin.site.register(Product)
 admin.site.register(Material)
-admin.site.register(OrderCount)
-admin.site.register(Statute)
+admin.site.register(Result)
+admin.site.register(MaterialDetail)
+
+
+# admin.site.register(Statute)
 # admin.site.register(ProductMaterial)
 # admin.site.register(Warehouse)
 

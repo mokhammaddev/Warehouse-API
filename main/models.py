@@ -32,6 +32,14 @@ class ProductMaterial(models.Model):
     quantity = models.IntegerField()
 
 
-class OrderCount(models.Model):
+class MaterialDetail(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    charter = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.charter
+
+
+class Result(models.Model):
     product_name = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_qty = models.IntegerField()
