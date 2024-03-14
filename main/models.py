@@ -25,17 +25,17 @@ class Material(models.Model):
     def __str__(self):
         return self.name
 
-    @property
-    def get_name(self):
-        return self.name
-
-    @property
-    def get_price(self):
-        return self.price
-
-    @property
-    def get_count(self):
-        return self.count
+    # def __init__(self):
+    #     self.count = Material.count
+    #     self.price = Material.price
+    #
+    # @property
+    # def get_price(self):
+    #     return self.price
+    #
+    # @property
+    # def get_count(self):
+    #     return self.count
 
 
 class ProductMaterial(models.Model):
