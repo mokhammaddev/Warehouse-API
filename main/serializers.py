@@ -28,10 +28,10 @@ class ResultSerializer(serializers.ModelSerializer):
         product_materials = Material.objects.all()
         serializer = MaterialSerializer(product_materials, many=True)
         # print(serializer.data)
-        instance = Material.objects.create(name='hello', count=1, price=23)
-        count = serializer.data
-        for c in count:
-            print(dict(c).get('count'))
+        # instance = Material.objects.create(name='hello', count=1, price=23)
+        # count = serializer.data
+        # for c in count:
+        #     print(dict(c).get('count'))
 
         # print(count)
         return serializer.data
@@ -71,3 +71,4 @@ class ResultSerializer(serializers.ModelSerializer):
     #     instance = Result.objects.create(**validated_data)
     #     instance.save()
     #     return instance
+
