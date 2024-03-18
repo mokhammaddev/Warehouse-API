@@ -14,6 +14,12 @@ class MaterialSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProductMaterialPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductMaterial
+        fields = '__all__'
+
+
 class ProductMaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductMaterial
@@ -22,18 +28,10 @@ class ProductMaterialSerializer(serializers.ModelSerializer):
 
 class ResultSerializer(serializers.ModelSerializer):
     product_materials = serializers.SerializerMethodField(read_only=True)
-    # id = serializers.CharField(source='person_id', read_only=True)
 
     def get_product_materials(self, obj):
         product_materials = Material.objects.all()
         serializer = MaterialSerializer(product_materials, many=True)
-        # print(serializer.data)
-        # instance = Material.objects.create(name='hello', count=1, price=23)
-        # count = serializer.data
-        # for c in count:
-        #     print(dict(c).get('count'))
-
-        # print(count)
         return serializer.data
 
     class Meta:
@@ -43,13 +41,46 @@ class ResultSerializer(serializers.ModelSerializer):
             'product_name': {'required': True},
         }
 
-    # def validate(self, attrs):
-    #     qty = attrs.get('product_qty')
-    #     name = attrs.get('product_name')
-    #     return attrs
+    def validate(self, attrs):
+        information = []
+        qty = attrs.get('product_qty')
+        name = attrs.get('product_name')
+        product_first = Product.objects.first()
+        materials = Material.objects.all()
+        a = Material.objects.get(id=materials.filter()[1].id).count
+        if name == product_first:
+            task1 = int(qty * 0.8)
+            task2 = int(qty * 5)
+            task3 = int(qty * 10)
+            information.append(task1)
+            information.append(task2)
+            information.append(task3)
+            # if task1 < Material.objects.get(id=materials.filter()[1].id).count:
+            #     Material.objects.create(id=materials.filter()[1].id,
+            #                             name=Material.objects.get(id=materials.filter()[1].id).count,
+            #                             count=Material.objects.get(id=materials.filter()[1].id).count - task1,
+            #                             price=materials.filter()[1].price)
+        print(information)
+        return attrs
 
     # def create(self, validated_data):
     #     information = []
+    #     qty = validated_data.get('product_qty')
+    #     name = validated_data.get('product_name')
+    #     product_first = Product.objects.first()
+    #     materials = Material.objects.all()
+    #     if name == product_first:
+    #         task1 = int(qty * 0.8)
+    #         task2 = int(qty * 5)
+    #         task3 = int(qty * 10)
+    #         information.append(task1)
+    #         information.append(task2)
+    #         information.append(task3)
+    #         if task1 < Material.objects.get(id=materials.filter()[1].id).count:
+    #             Material.objects.create(id=materials.filter()[1].id,
+    #                                     count=Material.objects.get(id=materials.filter()[1].id).count - task1, **validated_data)
+    #     return validated_data
+
     #     products = Product.objects.all()
     #     materials = Material.objects.values_list("count", flat=True).order_by("id")
     #     product_first = Product.objects.first()
@@ -71,4 +102,3 @@ class ResultSerializer(serializers.ModelSerializer):
     #     instance = Result.objects.create(**validated_data)
     #     instance.save()
     #     return instance
-

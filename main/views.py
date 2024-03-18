@@ -1,6 +1,6 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from main.models import ProductMaterial, Product, Material, Result
-from main.serializers import ProductSerializer, MaterialSerializer, ProductMaterialSerializer, ResultSerializer
+from main.serializers import ProductSerializer, MaterialSerializer, ProductMaterialSerializer, ResultSerializer, ProductMaterialPostSerializer
 
 
 class ProductListCreateAPIView(ListCreateAPIView):
@@ -9,8 +9,12 @@ class ProductListCreateAPIView(ListCreateAPIView):
 
 
 class MaterialListCreateAPIView(ListCreateAPIView):
-    serializer_class = MaterialSerializer
     queryset = Material.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MaterialSerializer
+        return ProductMaterialPostSerializer
 
 
 class ProductMaterialListCreateAPIView(ListCreateAPIView):
